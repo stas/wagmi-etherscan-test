@@ -1,0 +1,14 @@
+name: CI
+
+on: [push]
+
+jobs:
+  ci:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Build
+        run: docker run --init --rm -v "$(pwd):/app" -w /app -t node:lts-alpine sh -c 'yarn && yarn wagmi generate'
